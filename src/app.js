@@ -1,9 +1,21 @@
-const http = require('http');
-const server = http.createServer((req, res) => {
-    if (req.url === '/about') {
-        res.end('<h1>Manara</h1>')
-    }
-    res.write("Hi manara")
-    res.end()
+const express = require('express')
+const path = require('path')
+const MongoClient = require('mongodb');
+const app = express()
+
+const url = 'mongodb://localhost:27017';
+const dbName = 'myDatabase';
+
+
+MongoClient.connect(url, (err, client) => {
+    console.log("Connected successfully to server");
+
+    const db = client.db(dbName)
+
+    client.close();
 })
-server.listen(3000)
+
+
+app.listen(3000, () => {
+    console.log("welcome to Server 30000 .....")
+})
